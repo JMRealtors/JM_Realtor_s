@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import heroImage1 from "@/assets/hero-banner-1.jpg";
 import heroImage2 from "@/assets/hero-banner-2.jpg";
 import heroImage3 from "@/assets/hero-banner-3.jpg";
@@ -28,6 +29,7 @@ const heroSlides = [
 
 export function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -49,14 +51,22 @@ export function Hero() {
     setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
   };
 
+  const handleExploreProjects = () => {
+    navigate('/projects');
+  };
+
+  const handleScheduleVisit = () => {
+    navigate('/contact');
+  };
+
   return (
     <section className="relative h-[600px] md:h-[700px] overflow-hidden">
       {/* Hero Images */}
       {heroSlides.map((slide, index) => (
         <div
           key={index}
-          className={`absolute inset-0 transition-opacity duration-1000 ${
-            index === currentSlide ? "opacity-100" : "opacity-0"
+          className={`absolute inset-0 transition-all duration-1000 ${
+            index === currentSlide ? "opacity-100 scale-100" : "opacity-0 scale-105"
           }`}
         >
           <img
@@ -70,21 +80,31 @@ export function Hero() {
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
-        <div className="max-w-2xl text-white">
-          <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-4">
+        <div className="max-w-2xl text-white animate-fade-in">
+          <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-4 animate-slide-up">
             {heroSlides[currentSlide].title}
           </h1>
-          <h2 className="text-xl md:text-2xl font-light mb-6 text-white/90">
+          <h2 className="text-xl md:text-2xl font-light mb-6 text-white/90 animate-slide-up animation-delay-200">
             {heroSlides[currentSlide].subtitle}
           </h2>
-          <p className="text-lg md:text-xl mb-8 text-white/80 max-w-xl">
+          <p className="text-lg md:text-xl mb-8 text-white/80 max-w-xl animate-slide-up animation-delay-400">
             {heroSlides[currentSlide].description}
           </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Button variant="secondary" size="lg" className="bg-white text-primary hover:bg-white/90">
+          <div className="flex flex-col sm:flex-row gap-4 animate-slide-up animation-delay-600">
+            <Button 
+              variant="secondary" 
+              size="lg" 
+              className="bg-white text-primary hover:bg-white/90 hover:scale-105 transition-all duration-300"
+              onClick={handleExploreProjects}
+            >
               Explore Projects
             </Button>
-            <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-primary">
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="border-white text-white hover:bg-white hover:text-primary hover:scale-105 transition-all duration-300"
+              onClick={handleScheduleVisit}
+            >
               Schedule a Visit
             </Button>
           </div>
@@ -94,14 +114,14 @@ export function Hero() {
       {/* Navigation Controls */}
       <button
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-white/20 text-white hover:bg-white/30 transition-colors"
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-white/20 text-white hover:bg-white/30 transition-all duration-300 hover:scale-110"
         aria-label="Previous slide"
       >
         <ChevronLeft className="w-6 h-6" />
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-white/20 text-white hover:bg-white/30 transition-colors"
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-white/20 text-white hover:bg-white/30 transition-all duration-300 hover:scale-110"
         aria-label="Next slide"
       >
         <ChevronRight className="w-6 h-6" />
@@ -113,8 +133,8 @@ export function Hero() {
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-3 h-3 rounded-full transition-colors ${
-              index === currentSlide ? "bg-white" : "bg-white/40"
+            className={`w-3 h-3 rounded-full transition-all duration-300 hover:scale-125 ${
+              index === currentSlide ? "bg-white animate-scale-in" : "bg-white/40 hover:bg-white/60"
             }`}
             aria-label={`Go to slide ${index + 1}`}
           />

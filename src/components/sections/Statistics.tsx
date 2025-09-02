@@ -41,18 +41,19 @@ export function Statistics() {
           {stats.map((stat, index) => (
             <div
               key={index}
-              className="text-center group hover:scale-105 transition-transform duration-300"
+              className="text-center group hover:scale-105 transition-all duration-500 animate-slide-up cursor-pointer"
+              style={{ animationDelay: `${index * 100}ms` }}
             >
-              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-hero rounded-full flex items-center justify-center">
-                <stat.icon className="w-8 h-8 text-white" />
+              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-hero rounded-full flex items-center justify-center group-hover:animate-float">
+                <stat.icon className="w-8 h-8 text-white group-hover:scale-110 transition-transform duration-300" />
               </div>
-              <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
+              <div className="text-3xl md:text-4xl font-bold text-primary mb-2 group-hover:text-primary-hover transition-colors duration-300">
                 {stat.number}
               </div>
               <div className="text-lg font-semibold text-foreground mb-1">
                 {stat.label}
               </div>
-              <div className="text-sm text-muted-foreground">
+              <div className="text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-300">
                 {stat.description}
               </div>
             </div>

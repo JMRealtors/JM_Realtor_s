@@ -1,8 +1,10 @@
 import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Users, Award, Target, Heart, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const values = [
   {
@@ -36,6 +38,20 @@ const achievements = [
 ];
 
 export default function About() {
+  const navigate = useNavigate();
+
+  const handleViewProjects = () => {
+    navigate('/projects');
+  };
+
+  const handleExploreProperties = () => {
+    navigate('/projects');
+  };
+
+  const handleScheduleConsultation = () => {
+    navigate('/contact');
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -44,12 +60,12 @@ export default function About() {
         {/* Hero Section */}
         <section className="py-20 bg-gradient-hero">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-4xl mx-auto text-center text-white">
-              <h1 className="text-4xl md:text-6xl font-bold mb-6">About EstateCore</h1>
-              <p className="text-xl md:text-2xl font-light mb-8">
+            <div className="max-w-4xl mx-auto text-center text-white animate-fade-in">
+              <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-slide-up">About EstateCore</h1>
+              <p className="text-xl md:text-2xl font-light mb-8 animate-slide-up animation-delay-200">
                 Building Dreams, Creating Communities, Delivering Excellence
               </p>
-              <p className="text-lg opacity-90 max-w-3xl mx-auto">
+              <p className="text-lg opacity-90 max-w-3xl mx-auto animate-slide-up animation-delay-400">
                 With over 6 years of experience in the real estate industry, we have established ourselves 
                 as a trusted name in residential development, committed to creating exceptional living experiences.
               </p>
@@ -61,7 +77,7 @@ export default function About() {
         <section className="py-20">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div>
+              <div className="animate-fade-in">
                 <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">Our Story</h2>
                 <p className="text-lg text-muted-foreground mb-6">
                   Founded with a vision to transform the real estate landscape, EstateCore has grown from a 
@@ -72,14 +88,19 @@ export default function About() {
                   Today, we continue to innovate and set new standards in the industry, combining modern design 
                   with sustainable practices to create communities that stand the test of time.
                 </p>
-                <Button variant="default" size="lg">
+                <Button 
+                  variant="default" 
+                  size="lg"
+                  onClick={handleViewProjects}
+                  className="hover:scale-105 transition-all duration-300"
+                >
                   View Our Projects
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
               </div>
-              <div className="relative">
-                <div className="w-full h-96 bg-gradient-to-br from-primary/10 to-primary/20 rounded-lg flex items-center justify-center">
-                  <Users className="w-24 h-24 text-primary opacity-50" />
+              <div className="relative animate-slide-up animation-delay-300">
+                <div className="w-full h-96 bg-gradient-to-br from-primary/10 to-primary/20 rounded-lg flex items-center justify-center hover:scale-105 transition-transform duration-500">
+                  <Users className="w-24 h-24 text-primary opacity-50 animate-float" />
                 </div>
               </div>
             </div>
@@ -89,7 +110,7 @@ export default function About() {
         {/* Values */}
         <section className="py-20 bg-secondary">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
+            <div className="text-center mb-12 animate-fade-in">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Our Values</h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 The principles that guide everything we do, from planning to delivery
@@ -98,9 +119,13 @@ export default function About() {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {values.map((value, index) => (
-                <Card key={index} className="bg-gradient-card hover:shadow-card-hover transition-all duration-300">
+                <Card 
+                  key={index} 
+                  className="bg-gradient-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-2 animate-slide-up"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
                   <CardContent className="p-6 text-center">
-                    <div className="w-16 h-16 mx-auto mb-4 bg-gradient-hero rounded-full flex items-center justify-center">
+                    <div className="w-16 h-16 mx-auto mb-4 bg-gradient-hero rounded-full flex items-center justify-center hover:animate-float">
                       <value.icon className="w-8 h-8 text-white" />
                     </div>
                     <h3 className="text-xl font-semibold text-foreground mb-3">{value.title}</h3>
@@ -115,7 +140,7 @@ export default function About() {
         {/* Timeline */}
         <section className="py-20">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
+            <div className="text-center mb-12 animate-fade-in">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Our Journey</h2>
               <p className="text-lg text-muted-foreground">
                 Key milestones that have shaped our growth and success
@@ -125,8 +150,12 @@ export default function About() {
             <div className="max-w-4xl mx-auto">
               <div className="space-y-8">
                 {achievements.map((achievement, index) => (
-                  <div key={index} className="flex items-center gap-6">
-                    <Badge variant="default" className="text-lg px-4 py-2 min-w-20">
+                  <div 
+                    key={index} 
+                    className="flex items-center gap-6 animate-slide-up hover:scale-105 transition-all duration-300"
+                    style={{ animationDelay: `${index * 150}ms` }}
+                  >
+                    <Badge variant="default" className="text-lg px-4 py-2 min-w-20 animate-scale-in">
                       {achievement.year}
                     </Badge>
                     <div className="flex-1 h-px bg-border"></div>
@@ -143,17 +172,27 @@ export default function About() {
         {/* CTA Section */}
         <section className="py-20 bg-gradient-hero">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="max-w-3xl mx-auto text-white">
+            <div className="max-w-3xl mx-auto text-white animate-fade-in">
               <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Build Your Future?</h2>
               <p className="text-xl mb-8 opacity-90">
                 Join hundreds of satisfied families who have made EstateCore their trusted partner 
                 in finding the perfect home.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button variant="secondary" size="lg" className="bg-white text-primary hover:bg-white/90">
+                <Button 
+                  variant="secondary" 
+                  size="lg" 
+                  className="bg-white text-primary hover:bg-white/90 hover:scale-105 transition-all duration-300"
+                  onClick={handleExploreProperties}
+                >
                   Explore Properties
                 </Button>
-                <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-primary">
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="border-white text-white hover:bg-white hover:text-primary hover:scale-105 transition-all duration-300"
+                  onClick={handleScheduleConsultation}
+                >
                   Schedule Consultation
                 </Button>
               </div>
@@ -161,6 +200,7 @@ export default function About() {
           </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 }
