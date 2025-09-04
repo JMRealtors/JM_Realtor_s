@@ -50,8 +50,8 @@ export function Header() {
 
           {/* CTA Button */}
           <div className="hidden md:flex">
-            <Button variant="default" size="sm">
-              Get In Touch
+            <Button variant="default" size="sm" asChild>
+              <Link to="/contact">Get In Touch</Link>
             </Button>
           </div>
 
@@ -92,8 +92,8 @@ export function Header() {
               </Link>
             ))}
             <div className="px-3 py-2">
-              <Button variant="default" size="sm" className="w-full">
-                Get In Touch
+              <Button variant="default" size="sm" className="w-full" asChild>
+                <Link to="/contact">Get In Touch</Link>
               </Button>
             </div>
           </div>

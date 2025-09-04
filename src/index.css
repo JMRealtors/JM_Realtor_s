@@ -56,6 +56,12 @@
     /* Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    /* Animation classes */
+    --animation-fade-in: fadeIn 0.6s ease-out forwards;
+    --animation-slide-up: slideUp 0.8s ease-out forwards;
+    --animation-scale: scale 0.5s ease-out forwards;
+    --animation-float: float 3s ease-in-out infinite;
 
     --radius: 0.5rem;
 
@@ -132,4 +138,76 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Animation Keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Animation Classes */
+.animate-fade-in {
+  animation: var(--animation-fade-in);
+}
+
+.animate-slide-up {
+  animation: var(--animation-slide-up);
+}
+
+.animate-scale {
+  animation: var(--animation-scale);
+}
+
+.animate-float {
+  animation: var(--animation-float);
+}
+
+/* Intersection Observer Animation Classes */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: var(--transition-smooth);
+}
+
+.fade-in.animate {
+  opacity: 1;
+  transform: translateY(0);
 }

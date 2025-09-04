@@ -1,62 +1,115 @@
-import { Building, MapPin, Users, Home, TrendingUp } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { TrendingUp, Users, Building, Award } from "lucide-react";
 
 const stats = [
   {
     icon: Building,
-    number: "15+",
-    label: "Projects",
-    description: "Successfully completed"
-  },
-  {
-    icon: MapPin,
-    number: "1200+",
-    label: "Villa Plots",
-    description: "Premium locations"
+    value: "500+",
+    label: "Properties Sold",
+    description: "Successfully delivered premium real estate projects",
   },
   {
     icon: Users,
-    number: "800+",
-    label: "Happy Customers",
-    description: "Satisfied families"
-  },
-  {
-    icon: Home,
-    number: "2M+",
-    label: "Sq.Ft Delivered",
-    description: "Quality construction"
+    value: "1,200+",
+    label: "Happy Clients",
+    description: "Satisfied customers who trust our expertise",
   },
   {
     icon: TrendingUp,
-    number: "15M+",
-    label: "Sq.Ft in Pipeline",
-    description: "Future developments"
-  }
+    value: "$2.8B+",
+    label: "Total Sales",
+    description: "Combined value of all transactions completed",
+  },
+  {
+    icon: Award,
+    value: "15+",
+    label: "Years Experience",
+    description: "Decades of excellence in real estate industry",
+  },
 ];
 
 export function Statistics() {
+  const [isVisible, setIsVisible] = useState(false);
+  const [counters, setCounters] = useState(stats.map(() => 0));
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isVisible) {
+          setIsVisible(true);
+          animateCounters();
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [isVisible]);
+
+  const animateCounters = () => {
+    const targets = [500, 1200, 2800, 15];
+    const duration = 2000; // 2 seconds
+    const steps = 60;
+    const interval = duration / steps;
+
+    let step = 0;
+    const timer = setInterval(() => {
+      step++;
+      setCounters(targets.map(target => Math.min(Math.floor((target * step) / steps), target)));
+      
+      if (step >= steps) {
+        clearInterval(timer);
+      }
+    }, interval);
+  };
+
   return (
-    <section className="py-16 bg-secondary">
+    <section ref={sectionRef} className="py-20 bg-gradient-hero">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
-          {stats.map((stat, index) => (
-            <div
-              key={index}
-              className="text-center group hover:scale-105 transition-transform duration-300"
-            >
-              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-hero rounded-full flex items-center justify-center">
-                <stat.icon className="w-8 h-8 text-white" />
+        <div className={`text-center mb-16 ${isVisible ? "animate-fade-in" : "opacity-0"}`}>
+          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-primary-foreground">
+            Our Achievements
+          </h2>
+          <p className="text-lg text-primary-foreground/80 max-w-2xl mx-auto">
+            Numbers that speak to our commitment to excellence and client satisfaction in the real estate industry.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {stats.map((stat, index) => {
+            const IconComponent = stat.icon;
+            return (
+              <div 
+                key={index}
+                className={`text-center p-8 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 transform transition-all duration-700 hover:scale-105 hover:bg-white/15 ${
+                  isVisible 
+                    ? "animate-slide-up opacity-100" 
+                    : "opacity-0 translate-y-10"
+                }`}
+                style={{ animationDelay: `${index * 200}ms` }}
+              >
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-full mb-6 animate-float">
+                  <IconComponent className="h-8 w-8 text-primary-foreground" />
+                </div>
+                <div className="text-4xl md:text-5xl font-bold mb-2 text-primary-foreground">
+                  {index === 2 ? `$${(counters[index] / 1000).toFixed(1)}B` : 
+                   index === 1 ? `${counters[index].toLocaleString()}` : 
+                   `${counters[index]}${index === 0 ? '+' : index === 3 ? '+' : '+'}`}
+                </div>
+                <h3 className="text-xl font-semibold mb-2 text-primary-foreground">
+                  {stat.label}
+                </h3>
+                <p className="text-primary-foreground/70 text-sm">
+                  {stat.description}
+                </p>
               </div>
-              <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
-                {stat.number}
-              </div>
-              <div className="text-lg font-semibold text-foreground mb-1">
-                {stat.label}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                {stat.description}
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

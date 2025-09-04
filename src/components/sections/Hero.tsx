@@ -1,67 +1,60 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import heroImage1 from "@/assets/hero-banner-1.jpg";
-import heroImage2 from "@/assets/hero-banner-2.jpg";
-import heroImage3 from "@/assets/hero-banner-3.jpg";
+import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
+import heroBanner1 from "@/assets/hero-banner-1.jpg";
+import heroBanner2 from "@/assets/hero-banner-2.jpg";
+import heroBanner3 from "@/assets/hero-banner-3.jpg";
+import { Link } from "react-router-dom";
 
-const heroSlides = [
+const banners = [
   {
-    image: heroImage1,
-    title: "Premium Villa Plots",
-    subtitle: "Discover Your Dream Home in Prime Locations",
-    description: "Experience luxury living with our carefully planned residential developments featuring modern amenities and world-class infrastructure."
+    image: heroBanner1,
+    title: "Premium Real Estate Solutions",
+    subtitle: "Discover your perfect home with our curated selection of luxury properties",
   },
   {
-    image: heroImage2,
-    title: "Gated Communities",
-    subtitle: "Security & Serenity Combined", 
-    description: "Live in thoughtfully designed communities with 24/7 security, landscaped gardens, and premium facilities for your family."
+    image: heroBanner2,
+    title: "Investment Opportunities Await",
+    subtitle: "Build your wealth portfolio with prime real estate investments",
   },
   {
-    image: heroImage3,
-    title: "Modern Amenities",
-    subtitle: "Lifestyle Redefined",
-    description: "Enjoy clubhouses, swimming pools, fitness centers, and recreational facilities designed for contemporary living."
-  }
+    image: heroBanner3,
+    title: "Modern Living Redefined",
+    subtitle: "Experience contemporary luxury in our exclusive developments",
+  },
 ];
 
 export function Hero() {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentBanner, setCurrentBanner] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    const timer = setInterval(() => {
+      setCurrentBanner((prev) => (prev + 1) % banners.length);
     }, 5000);
-
-    return () => clearInterval(interval);
+    return () => clearInterval(timer);
   }, []);
 
-  const goToSlide = (index: number) => {
-    setCurrentSlide(index);
+  const nextBanner = () => {
+    setCurrentBanner((prev) => (prev + 1) % banners.length);
   };
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+  const prevBanner = () => {
+    setCurrentBanner((prev) => (prev - 1 + banners.length) % banners.length);
   };
 
   return (
-    <section className="relative h-[600px] md:h-[700px] overflow-hidden">
-      {/* Hero Images */}
-      {heroSlides.map((slide, index) => (
+    <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      {/* Background Images */}
+      {banners.map((banner, index) => (
         <div
           key={index}
           className={`absolute inset-0 transition-opacity duration-1000 ${
-            index === currentSlide ? "opacity-100" : "opacity-0"
+            index === currentBanner ? "opacity-100" : "opacity-0"
           }`}
         >
           <img
-            src={slide.image}
-            alt={slide.title}
+            src={banner.image}
+            alt={banner.title}
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-overlay" />
@@ -69,54 +62,55 @@ export function Hero() {
       ))}
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
-        <div className="max-w-2xl text-white">
-          <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-4">
-            {heroSlides[currentSlide].title}
-          </h1>
-          <h2 className="text-xl md:text-2xl font-light mb-6 text-white/90">
-            {heroSlides[currentSlide].subtitle}
-          </h2>
-          <p className="text-lg md:text-xl mb-8 text-white/80 max-w-xl">
-            {heroSlides[currentSlide].description}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Button variant="secondary" size="lg" className="bg-white text-primary hover:bg-white/90">
-              Explore Projects
-            </Button>
-            <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-primary">
-              Schedule a Visit
-            </Button>
-          </div>
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center text-white animate-fade-in">
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 animate-slide-up">
+          {banners[currentBanner].title}
+        </h1>
+        <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto animate-fade-in opacity-90">
+          {banners[currentBanner].subtitle}
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center animate-scale">
+          <Button size="lg" className="bg-white text-primary hover:bg-white/90" asChild>
+            <Link to="/projects">
+              Explore Properties
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
+          </Button>
+          <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary" asChild>
+            <Link to="/contact">Contact Us</Link>
+          </Button>
         </div>
       </div>
 
-      {/* Navigation Controls */}
-      <button
-        onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-white/20 text-white hover:bg-white/30 transition-colors"
-        aria-label="Previous slide"
+      {/* Navigation Arrows */}
+      <Button
+        variant="ghost"
+        size="icon"
+        onClick={prevBanner}
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 text-white hover:bg-white/20 animate-float"
       >
-        <ChevronLeft className="w-6 h-6" />
-      </button>
-      <button
-        onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-white/20 text-white hover:bg-white/30 transition-colors"
-        aria-label="Next slide"
+        <ChevronLeft className="h-8 w-8" />
+      </Button>
+      <Button
+        variant="ghost"
+        size="icon"
+        onClick={nextBanner}
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 text-white hover:bg-white/20 animate-float"
       >
-        <ChevronRight className="w-6 h-6" />
-      </button>
+        <ChevronRight className="h-8 w-8" />
+      </Button>
 
-      {/* Indicators */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex space-x-2">
-        {heroSlides.map((_, index) => (
+      {/* Banner Indicators */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex space-x-3">
+        {banners.map((_, index) => (
           <button
             key={index}
-            onClick={() => goToSlide(index)}
-            className={`w-3 h-3 rounded-full transition-colors ${
-              index === currentSlide ? "bg-white" : "bg-white/40"
+            onClick={() => setCurrentBanner(index)}
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              index === currentBanner
+                ? "bg-white"
+                : "bg-white/50 hover:bg-white/75"
             }`}
-            aria-label={`Go to slide ${index + 1}`}
           />
         ))}
       </div>

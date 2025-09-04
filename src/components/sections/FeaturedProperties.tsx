@@ -1,220 +1,177 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Home, Ruler, ArrowRight } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Card, CardContent } from "@/components/ui/card";
+import { MapPin, Bed, Bath, Square, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import propertyBw1 from "@/assets/property-bw-1.jpg";
+import propertyBw2 from "@/assets/property-bw-2.jpg";
+import propertyBw3 from "@/assets/property-bw-3.jpg";
+import propertyBw4 from "@/assets/property-bw-4.jpg";
+import propertyBw5 from "@/assets/property-bw-5.jpg";
 
-const propertyCategories = [
-  { id: "ongoing", label: "Ongoing", count: 8 },
-  { id: "upcoming", label: "Upcoming", count: 5 },
-  { id: "completed", label: "Completed", count: 12 }
+const properties = [
+  {
+    id: 1,
+    title: "Luxury Villa Estate",
+    location: "Beverly Hills, CA",
+    price: "$2,850,000",
+    image: propertyBw1,
+    beds: 5,
+    baths: 4,
+    sqft: "4,200",
+    status: "Available",
+    statusColor: "bg-estate-success" as const,
+  },
+  {
+    id: 2,
+    title: "Modern Penthouse",
+    location: "Manhattan, NY",
+    price: "$3,200,000",
+    image: propertyBw2,
+    beds: 3,
+    baths: 3,
+    sqft: "2,800",
+    status: "Sold",
+    statusColor: "bg-destructive" as const,
+  },
+  {
+    id: 3,
+    title: "Downtown Loft",
+    location: "Los Angeles, CA",
+    price: "$1,750,000",
+    image: propertyBw3,
+    beds: 2,
+    baths: 2,
+    sqft: "1,900",
+    status: "Available",
+    statusColor: "bg-estate-success" as const,
+  },
+  {
+    id: 4,
+    title: "Corporate Office",
+    location: "San Francisco, CA",
+    price: "$4,500,000",
+    image: propertyBw4,
+    beds: 0,
+    baths: 8,
+    sqft: "12,000",
+    status: "Under Contract",
+    statusColor: "bg-estate-gold" as const,
+  },
+  {
+    id: 5,
+    title: "Family Townhouse",
+    location: "Chicago, IL",
+    price: "$890,000",
+    image: propertyBw5,
+    beds: 4,
+    baths: 3,
+    sqft: "2,400",
+    status: "Available",
+    statusColor: "bg-estate-success" as const,
+  },
 ];
 
-const properties = {
-  ongoing: [
-    {
-      id: 1,
-      name: "EstateCore - Prime Vista",
-      location: "Whitefield",
-      availablePlots: 245,
-      propertyType: "Villa Plots",
-      totalSize: "1200 - 3500",
-      price: "₹45L - ₹1.2Cr",
-      image: "/api/placeholder/400/300",
-      status: "Available"
-    },
-    {
-      id: 2,
-      name: "EstateCore - Garden Valley", 
-      location: "Electronic City",
-      availablePlots: 189,
-      propertyType: "Gated Community",
-      totalSize: "1500 - 2800",
-      price: "₹65L - ₹95L", 
-      image: "/api/placeholder/400/300",
-      status: "Selling Fast"
-    },
-    {
-      id: 3,
-      name: "EstateCore - Serenity Heights",
-      location: "Sarjapur Road",
-      availablePlots: 156,
-      propertyType: "Premium Villas",
-      totalSize: "2000 - 4000",
-      price: "₹85L - ₹1.8Cr",
-      image: "/api/placeholder/400/300", 
-      status: "Available"
-    }
-  ],
-  upcoming: [
-    {
-      id: 4,
-      name: "EstateCore - Future Park",
-      location: "Hennur Road",
-      availablePlots: 320,
-      propertyType: "Villa Plots",
-      totalSize: "1100 - 2500",
-      price: "₹38L - ₹85L",
-      image: "/api/placeholder/400/300",
-      status: "Launching Soon"
-    },
-    {
-      id: 5,
-      name: "EstateCore - Tech Hub",
-      location: "ORR - Bellandur",
-      availablePlots: 275,
-      propertyType: "Smart Homes",
-      totalSize: "1400 - 3200",
-      price: "₹72L - ₹1.4Cr",
-      image: "/api/placeholder/400/300",
-      status: "Pre Launch"
-    }
-  ],
-  completed: [
-    {
-      id: 6,
-      name: "EstateCore - Heritage Park",
-      location: "JP Nagar",
-      availablePlots: 0,
-      propertyType: "Villa Community",
-      totalSize: "1800 - 3500",
-      price: "Sold Out",
-      image: "/api/placeholder/400/300",
-      status: "Completed"
-    },
-    {
-      id: 7,
-      name: "EstateCore - Royal Gardens",
-      location: "Koramangala",
-      availablePlots: 0,
-      propertyType: "Luxury Villas", 
-      totalSize: "2500 - 5000",
-      price: "Sold Out",
-      image: "/api/placeholder/400/300",
-      status: "Completed"
-    }
-  ]
-};
-
 export function FeaturedProperties() {
-  const [activeCategory, setActiveCategory] = useState("ongoing");
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "Available":
-        return "bg-estate-success text-estate-success-foreground";
-      case "Selling Fast":
-        return "bg-estate-gold text-estate-gold-foreground";
-      case "Launching Soon":
-        return "bg-primary text-primary-foreground";
-      case "Pre Launch":
-        return "bg-accent text-accent-foreground";
-      case "Completed":
-        return "bg-muted text-muted-foreground";
-      default:
-        return "bg-secondary text-secondary-foreground";
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
     }
-  };
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <section className="py-20 bg-background">
+    <section ref={sectionRef} className="py-20 bg-muted/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+        <div className={`text-center mb-16 ${isVisible ? "animate-fade-in" : "opacity-0"}`}>
+          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-foreground">
             Featured Properties
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Discover your ideal plot with us — whether it's ready to build, coming soon, 
-            or already a success story. Each project is thoughtfully planned with modern infrastructure.
+            Discover our handpicked selection of premium properties, each offering unique features and exceptional value.
           </p>
         </div>
 
-        {/* Category Tabs */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {propertyCategories.map((category) => (
-            <Button
-              key={category.id}
-              variant={activeCategory === category.id ? "default" : "outline"}
-              onClick={() => setActiveCategory(category.id)}
-              className={cn(
-                "px-6 py-2 transition-all duration-300",
-                activeCategory === category.id && "shadow-elegant"
-              )}
-            >
-              {category.label}
-              <Badge variant="secondary" className="ml-2">
-                {category.count}
-              </Badge>
-            </Button>
-          ))}
-        </div>
-
-        {/* Properties Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {properties[activeCategory as keyof typeof properties].map((property) => (
+          {properties.map((property, index) => (
             <Card 
-              key={property.id}
-              className="group hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 bg-gradient-card"
+              key={property.id} 
+              className={`group overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-500 transform ${
+                isVisible 
+                  ? "animate-slide-up opacity-100" 
+                  : "opacity-0 translate-y-10"
+              }`}
+              style={{ animationDelay: `${index * 150}ms` }}
             >
-              <div className="relative overflow-hidden rounded-t-lg">
-                <div className="w-full h-48 bg-gradient-to-br from-primary/10 to-primary/20 flex items-center justify-center">
-                  <Home className="w-16 h-16 text-primary opacity-50" />
-                </div>
+              <div className="relative overflow-hidden">
+                <img
+                  src={property.image}
+                  alt={property.title}
+                  className="w-full h-64 object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700 transform group-hover:scale-110"
+                />
                 <Badge 
-                  className={cn("absolute top-3 right-3", getStatusColor(property.status))}
+                  className={`absolute top-4 left-4 ${property.statusColor} text-white border-0`}
                 >
                   {property.status}
                 </Badge>
+                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
+                  <span className="text-sm font-semibold text-foreground">{property.price}</span>
+                </div>
               </div>
               
               <CardContent className="p-6">
-                <h3 className="text-xl font-semibold text-foreground mb-2">
-                  {property.name}
+                <h3 className="text-xl font-semibold mb-2 text-foreground group-hover:text-primary transition-colors">
+                  {property.title}
                 </h3>
-                
                 <div className="flex items-center text-muted-foreground mb-4">
-                  <MapPin className="w-4 h-4 mr-1" />
+                  <MapPin className="h-4 w-4 mr-2" />
                   <span className="text-sm">{property.location}</span>
                 </div>
-
-                <div className="space-y-3 mb-6">
-                  <div className="flex justify-between">
-                    <span className="text-sm text-muted-foreground">Available Plots</span>
-                    <span className="text-sm font-medium">{property.availablePlots} Plots</span>
+                
+                <div className="flex justify-between items-center text-sm text-muted-foreground mb-4">
+                  <div className="flex items-center">
+                    <Bed className="h-4 w-4 mr-1" />
+                    <span>{property.beds}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-sm text-muted-foreground">Property Type</span>
-                    <span className="text-sm font-medium">{property.propertyType}</span>
+                  <div className="flex items-center">
+                    <Bath className="h-4 w-4 mr-1" />
+                    <span>{property.baths}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-sm text-muted-foreground">Size Range</span>
-                    <span className="text-sm font-medium">{property.totalSize} sq ft</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-sm text-muted-foreground">Price Range</span>
-                    <span className="text-sm font-bold text-primary">{property.price}</span>
+                  <div className="flex items-center">
+                    <Square className="h-4 w-4 mr-1" />
+                    <span>{property.sqft} sq ft</span>
                   </div>
                 </div>
-
-                <Button 
-                  variant="outline" 
-                  className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors"
-                >
+                
+                <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
                   View Details
-                  <ArrowRight className="w-4 h-4 ml-2" />
+                  <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </CardContent>
             </Card>
           ))}
         </div>
 
-        {/* View All Properties Button */}
-        <div className="text-center">
-          <Button variant="default" size="lg" className="shadow-elegant">
-            View All Properties
-            <ArrowRight className="w-5 h-5 ml-2" />
+        <div className={`text-center ${isVisible ? "animate-scale" : "opacity-0"}`}>
+          <Button size="lg" asChild>
+            <Link to="/projects">
+              View All Properties
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
           </Button>
         </div>
       </div>
