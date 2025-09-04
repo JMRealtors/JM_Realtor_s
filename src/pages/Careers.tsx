@@ -1,8 +1,10 @@
 import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Clock, Users, Briefcase, ArrowRight, Heart } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const openPositions = [
   {
@@ -171,11 +173,11 @@ export default function Careers() {
                       </div>
 
                       <div className="flex flex-col sm:flex-row lg:flex-col gap-2 lg:min-w-32">
-                        <Button variant="default" className="w-full lg:w-auto">
-                          Apply Now
+                        <Button variant="default" className="w-full lg:w-auto" asChild>
+                          <Link to="/contact">Apply Now</Link>
                         </Button>
-                        <Button variant="outline" className="w-full lg:w-auto">
-                          Learn More
+                        <Button variant="outline" className="w-full lg:w-auto" asChild>
+                          <Link to="/contact">Learn More</Link>
                         </Button>
                       </div>
                     </div>
@@ -188,9 +190,11 @@ export default function Careers() {
               <p className="text-muted-foreground mb-4">
                 Don't see a role that fits? We're always looking for talented individuals.
               </p>
-              <Button variant="outline" size="lg">
-                Send Us Your Resume
-                <ArrowRight className="w-5 h-5 ml-2" />
+              <Button variant="outline" size="lg" asChild>
+                <Link to="/contact">
+                  Send Us Your Resume
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Link>
               </Button>
             </div>
           </div>
@@ -224,9 +228,11 @@ export default function Careers() {
                     <span className="text-muted-foreground">Open communication and transparent leadership</span>
                   </li>
                 </ul>
-                <Button variant="default" size="lg">
-                  Learn About Our Values
-                  <ArrowRight className="w-5 h-5 ml-2" />
+                <Button variant="default" size="lg" asChild>
+                  <Link to="/about">
+                    Learn About Our Values
+                    <ArrowRight className="w-5 h-5 ml-2" />
+                  </Link>
                 </Button>
               </div>
               <div className="relative">
@@ -247,17 +253,18 @@ export default function Careers() {
                 Take the next step in your career and join a team that's building the future of real estate.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button variant="secondary" size="lg" className="bg-white text-primary hover:bg-white/90">
-                  Browse Open Positions
+                <Button variant="secondary" size="lg" className="bg-white text-primary hover:bg-white/90" asChild>
+                  <Link to="/careers">Browse Open Positions</Link>
                 </Button>
-                <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-primary">
-                  Contact HR Team
+                <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-primary" asChild>
+                  <Link to="/contact">Contact HR Team</Link>
                 </Button>
               </div>
             </div>
           </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 }

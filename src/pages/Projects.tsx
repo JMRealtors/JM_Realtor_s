@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { MapPin, Home, Ruler, ArrowRight, Search, Filter } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { MapPin, Home, Ruler, ArrowRight, Search, Filter, Phone, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Link } from "react-router-dom";
 
 const allProjects = [
   {
@@ -299,16 +302,78 @@ export default function Projects() {
                     </div>
 
                     <div className="flex gap-2">
-                      <Button 
-                        variant="outline" 
-                        size="sm"
-                        className="flex-1 group-hover:bg-primary group-hover:text-primary-foreground transition-colors"
-                      >
-                        View Details
-                      </Button>
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Button 
+                            variant="outline" 
+                            size="sm"
+                            className="flex-1 group-hover:bg-primary group-hover:text-primary-foreground transition-colors"
+                          >
+                            View Details
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent className="max-w-2xl">
+                          <DialogHeader>
+                            <DialogTitle className="text-2xl">{project.name}</DialogTitle>
+                          </DialogHeader>
+                          <div className="space-y-6">
+                            <div className="w-full h-48 bg-gradient-to-br from-primary/10 to-primary/20 rounded-lg flex items-center justify-center">
+                              <Home className="w-16 h-16 text-primary opacity-50" />
+                            </div>
+                            
+                            <div className="grid grid-cols-2 gap-4">
+                              <div>
+                                <p className="text-sm text-muted-foreground">Location</p>
+                                <p className="font-medium">{project.location}</p>
+                              </div>
+                              <div>
+                                <p className="text-sm text-muted-foreground">Property Type</p>
+                                <p className="font-medium">{project.propertyType}</p>
+                              </div>
+                              <div>
+                                <p className="text-sm text-muted-foreground">Size Range</p>
+                                <p className="font-medium">{project.sizeRange} sq ft</p>
+                              </div>
+                              <div>
+                                <p className="text-sm text-muted-foreground">Price Range</p>
+                                <p className="font-bold text-primary">{project.priceRange}</p>
+                              </div>
+                              <div>
+                                <p className="text-sm text-muted-foreground">Available Plots</p>
+                                <p className="font-medium">{project.availablePlots} / {project.totalPlots}</p>
+                              </div>
+                              <div>
+                                <p className="text-sm text-muted-foreground">Completion</p>
+                                <p className="font-medium">{project.completion}</p>
+                              </div>
+                            </div>
+                            
+                            <div>
+                              <p className="text-sm text-muted-foreground mb-2">All Amenities:</p>
+                              <div className="flex flex-wrap gap-2">
+                                {project.amenities.map((amenity, index) => (
+                                  <Badge key={index} variant="secondary" className="text-xs">
+                                    {amenity}
+                                  </Badge>
+                                ))}
+                              </div>
+                            </div>
+                            
+                            <div className="flex gap-2 pt-4">
+                              <Button variant="default" size="sm" className="flex-1" asChild>
+                                <Link to="/contact">Get In Touch</Link>
+                              </Button>
+                              <Button variant="outline" size="sm" className="flex-1">
+                                <Phone className="w-4 h-4 mr-1" />
+                                Call Now
+                              </Button>
+                            </div>
+                          </div>
+                        </DialogContent>
+                      </Dialog>
                       {project.status !== "Completed" && (
-                        <Button variant="default" size="sm" className="flex-1">
-                          Enquire Now
+                        <Button variant="default" size="sm" className="flex-1" asChild>
+                          <Link to="/contact">Enquire Now</Link>
                         </Button>
                       )}
                     </div>
@@ -348,17 +413,18 @@ export default function Projects() {
                 Our experts are here to help you find the perfect property.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button variant="secondary" size="lg" className="bg-white text-primary hover:bg-white/90">
-                  Schedule Site Visit
+                <Button variant="secondary" size="lg" className="bg-white text-primary hover:bg-white/90" asChild>
+                  <Link to="/contact">Schedule Site Visit</Link>
                 </Button>
-                <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-primary">
-                  Download Brochure
+                <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-primary" asChild>
+                  <Link to="/contact">Download Brochure</Link>
                 </Button>
               </div>
             </div>
           </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 }

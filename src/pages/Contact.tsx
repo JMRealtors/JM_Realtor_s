@@ -1,4 +1,5 @@
 import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -6,6 +7,8 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { MapPin, Phone, Mail, Clock, MessageSquare, Users, Calendar } from "lucide-react";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 const contactInfo = [
   {
@@ -67,6 +70,42 @@ const officeLocations = [
 ];
 
 export default function Contact() {
+  const { toast } = useToast();
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    inquiryType: '',
+    message: ''
+  });
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Simulate form submission
+    toast({
+      title: "Message Sent Successfully!",
+      description: "We'll get back to you within 24 hours.",
+    });
+    
+    // Reset form
+    setFormData({
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      inquiryType: '',
+      message: ''
+    });
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -128,57 +167,87 @@ export default function Contact() {
                       Fill out the form below and we'll get back to you within 24 hours.
                     </p>
                   </CardHeader>
-                  <CardContent className="p-6 pt-0 space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="firstName">First Name</Label>
-                        <Input id="firstName" placeholder="Enter your first name" />
+                  <CardContent className="p-6 pt-0">
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="firstName">First Name</Label>
+                          <Input 
+                            id="firstName" 
+                            placeholder="Enter your first name" 
+                            value={formData.firstName}
+                            onChange={(e) => handleInputChange('firstName', e.target.value)}
+                            required
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="lastName">Last Name</Label>
+                          <Input 
+                            id="lastName" 
+                            placeholder="Enter your last name" 
+                            value={formData.lastName}
+                            onChange={(e) => handleInputChange('lastName', e.target.value)}
+                            required
+                          />
+                        </div>
                       </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="lastName">Last Name</Label>
-                        <Input id="lastName" placeholder="Enter your last name" />
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="email">Email Address</Label>
+                          <Input 
+                            id="email" 
+                            type="email" 
+                            placeholder="your.email@example.com" 
+                            value={formData.email}
+                            onChange={(e) => handleInputChange('email', e.target.value)}
+                            required
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="phone">Phone Number</Label>
+                          <Input 
+                            id="phone" 
+                            placeholder="+91 98765 43210" 
+                            value={formData.phone}
+                            onChange={(e) => handleInputChange('phone', e.target.value)}
+                            required
+                          />
+                        </div>
                       </div>
-                    </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="email">Email Address</Label>
-                        <Input id="email" type="email" placeholder="your.email@example.com" />
+                        <Label htmlFor="inquiryType">Inquiry Type</Label>
+                        <Select value={formData.inquiryType} onValueChange={(value) => handleInputChange('inquiryType', value)}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select the type of inquiry" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {inquiryTypes.map((type, index) => (
+                              <SelectItem key={index} value={type.toLowerCase().replace(/\s+/g, '-')}>
+                                {type}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
                       </div>
+
                       <div className="space-y-2">
-                        <Label htmlFor="phone">Phone Number</Label>
-                        <Input id="phone" placeholder="+91 98765 43210" />
+                        <Label htmlFor="message">Message</Label>
+                        <Textarea 
+                          id="message" 
+                          placeholder="Tell us about your requirements, questions, or how we can help you..."
+                          className="min-h-32"
+                          value={formData.message}
+                          onChange={(e) => handleInputChange('message', e.target.value)}
+                          required
+                        />
                       </div>
-                    </div>
 
-                    <div className="space-y-2">
-                      <Label htmlFor="inquiryType">Inquiry Type</Label>
-                      <Select>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select the type of inquiry" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {inquiryTypes.map((type, index) => (
-                            <SelectItem key={index} value={type.toLowerCase().replace(/\s+/g, '-')}>
-                              {type}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="message">Message</Label>
-                      <Textarea 
-                        id="message" 
-                        placeholder="Tell us about your requirements, questions, or how we can help you..."
-                        className="min-h-32"
-                      />
-                    </div>
-
-                    <Button variant="default" size="lg" className="w-full">
-                      Send Message
-                    </Button>
+                      <Button type="submit" variant="default" size="lg" className="w-full">
+                        Send Message
+                      </Button>
+                    </form>
                   </CardContent>
                 </Card>
               </div>
@@ -302,10 +371,27 @@ export default function Contact() {
                 Let our experts help you find the perfect property that matches your dreams and budget.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button variant="secondary" size="lg" className="bg-white text-primary hover:bg-white/90">
+                <Button 
+                  variant="secondary" 
+                  size="lg" 
+                  className="bg-white text-primary hover:bg-white/90"
+                  onClick={() => {
+                    toast({
+                      title: "Consultation Request",
+                      description: "We'll contact you within 2 hours to schedule your consultation.",
+                    });
+                  }}
+                >
                   Schedule Consultation
                 </Button>
-                <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-primary">
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="border-white text-white hover:bg-white hover:text-primary"
+                  onClick={() => {
+                    window.location.href = "tel:+919876543210";
+                  }}
+                >
                   Call +91 98765 43210
                 </Button>
               </div>
@@ -313,6 +399,7 @@ export default function Contact() {
           </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 }

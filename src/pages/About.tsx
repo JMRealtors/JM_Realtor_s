@@ -1,8 +1,10 @@
 import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Users, Award, Target, Heart, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const values = [
   {
@@ -72,9 +74,11 @@ export default function About() {
                   Today, we continue to innovate and set new standards in the industry, combining modern design 
                   with sustainable practices to create communities that stand the test of time.
                 </p>
-                <Button variant="default" size="lg">
-                  View Our Projects
-                  <ArrowRight className="w-5 h-5 ml-2" />
+                <Button variant="default" size="lg" asChild>
+                  <Link to="/projects">
+                    View Our Projects
+                    <ArrowRight className="w-5 h-5 ml-2" />
+                  </Link>
                 </Button>
               </div>
               <div className="relative">
@@ -150,17 +154,18 @@ export default function About() {
                 in finding the perfect home.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button variant="secondary" size="lg" className="bg-white text-primary hover:bg-white/90">
-                  Explore Properties
+                <Button variant="secondary" size="lg" className="bg-white text-primary hover:bg-white/90" asChild>
+                  <Link to="/projects">Explore Properties</Link>
                 </Button>
-                <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-primary">
-                  Schedule Consultation
+                <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-primary" asChild>
+                  <Link to="/contact">Schedule Consultation</Link>
                 </Button>
               </div>
             </div>
           </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 }
