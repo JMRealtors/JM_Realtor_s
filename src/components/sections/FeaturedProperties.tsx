@@ -157,9 +157,15 @@ export function FeaturedProperties() {
                   </div>
                 </div>
                 
-                <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                  View Details
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                <Button 
+                  variant="outline" 
+                  className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors"
+                  asChild
+                >
+                  <Link to={`/projects?property=${property.id}`}>
+                    View Details
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
                 </Button>
               </CardContent>
             </Card>
@@ -167,7 +173,7 @@ export function FeaturedProperties() {
         </div>
 
         <div className={`text-center ${isVisible ? "animate-scale" : "opacity-0"}`}>
-          <Button size="lg" asChild>
+          <Button size="lg" variant="luxury" className="shadow-elegant hover:shadow-glow" asChild>
             <Link to="/projects">
               View All Properties
               <ArrowRight className="ml-2 h-5 w-5" />

@@ -28,6 +28,7 @@ export default {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))',
 					hover: 'hsl(var(--primary-hover))',
+					glow: 'hsl(var(--primary-glow))',
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
@@ -56,8 +57,12 @@ export default {
 				estate: {
 					gold: 'hsl(var(--estate-gold))',
 					'gold-foreground': 'hsl(var(--estate-gold-foreground))',
+					platinum: 'hsl(var(--estate-platinum))',
+					'platinum-foreground': 'hsl(var(--estate-platinum-foreground))',
 					success: 'hsl(var(--estate-success))',
 					'success-foreground': 'hsl(var(--estate-success-foreground))',
+					luxury: 'hsl(var(--estate-luxury))',
+					'luxury-foreground': 'hsl(var(--estate-luxury-foreground))',
 				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
@@ -79,11 +84,15 @@ export default {
 				'gradient-hero': 'var(--gradient-hero)',
 				'gradient-card': 'var(--gradient-card)',
 				'gradient-overlay': 'var(--gradient-overlay)',
+				'gradient-premium': 'var(--gradient-premium)',
+				'gradient-glass': 'var(--gradient-glass)',
 			},
 			boxShadow: {
 				'elegant': 'var(--shadow-elegant)',
 				'card': 'var(--shadow-card)',
 				'card-hover': 'var(--shadow-card-hover)',
+				'glow': 'var(--shadow-glow)',
+				'premium': 'var(--shadow-premium)',
 			},
 			transitionTimingFunction: {
 				'smooth': 'var(--transition-smooth)',
