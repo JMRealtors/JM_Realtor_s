@@ -5,33 +5,33 @@ import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from "luc
 
 export function Footer() {
   return (
-    <footer className="bg-card border-t border-border">
+    <footer className="bg-gradient-footer border-t border-border">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Company Info */}
           <div className="space-y-6">
             <div>
               <div className="flex items-center mb-4">
-                <div className="w-10 h-10 bg-gradient-hero rounded-lg flex items-center justify-center mr-3">
-                  <span className="text-primary-foreground font-bold text-lg">E</span>
+                <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center mr-3">
+                  <span className="text-white font-bold text-lg">E</span>
                 </div>
-                <span className="text-xl font-bold text-foreground">EstateCore</span>
+                <span className="text-xl font-bold text-white">EstateCore</span>
               </div>
-              <p className="text-muted-foreground text-sm leading-relaxed">
+              <p className="text-white/70 text-sm leading-relaxed">
                 Creating premium real estate experiences with innovative solutions and exceptional service for over a decade.
               </p>
             </div>
             <div className="flex space-x-4">
-              <Button variant="ghost" size="sm" className="p-2 h-9 w-9">
+              <Button variant="ghost" size="sm" className="p-2 h-9 w-9 text-white hover:bg-white/10">
                 <Facebook className="h-4 w-4" />
               </Button>
-              <Button variant="ghost" size="sm" className="p-2 h-9 w-9">
+              <Button variant="ghost" size="sm" className="p-2 h-9 w-9 text-white hover:bg-white/10">
                 <Twitter className="h-4 w-4" />
               </Button>
-              <Button variant="ghost" size="sm" className="p-2 h-9 w-9">
+              <Button variant="ghost" size="sm" className="p-2 h-9 w-9 text-white hover:bg-white/10">
                 <Instagram className="h-4 w-4" />
               </Button>
-              <Button variant="ghost" size="sm" className="p-2 h-9 w-9">
+              <Button variant="ghost" size="sm" className="p-2 h-9 w-9 text-white hover:bg-white/10">
                 <Linkedin className="h-4 w-4" />
               </Button>
             </div>
@@ -39,18 +39,18 @@ export function Footer() {
 
           {/* Quick Links */}
           <div className="space-y-6">
-            <h3 className="text-lg font-semibold text-foreground">Quick Links</h3>
+            <h3 className="text-lg font-semibold text-white">Quick Links</h3>
             <nav className="flex flex-col space-y-3">
-              <Link to="/about" className="text-muted-foreground hover:text-primary transition-colors text-sm">
+              <Link to="/about" className="text-white/80 hover:text-white transition-colors text-sm">
                 About Us
               </Link>
-              <Link to="/projects" className="text-muted-foreground hover:text-primary transition-colors text-sm">
+              <Link to="/projects" className="text-white/80 hover:text-white transition-colors text-sm">
                 Our Projects
               </Link>
-              <Link to="/careers" className="text-muted-foreground hover:text-primary transition-colors text-sm">
+              <Link to="/careers" className="text-white/80 hover:text-white transition-colors text-sm">
                 Careers
               </Link>
-              <Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors text-sm">
+              <Link to="/contact" className="text-white/80 hover:text-white transition-colors text-sm">
                 Contact Us
               </Link>
             </nav>
@@ -58,31 +58,31 @@ export function Footer() {
 
           {/* Contact Info */}
           <div className="space-y-6">
-            <h3 className="text-lg font-semibold text-foreground">Contact Info</h3>
+            <h3 className="text-lg font-semibold text-white">Contact Info</h3>
             <div className="space-y-4">
               <div className="flex items-start space-x-3">
-                <MapPin className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                <MapPin className="h-5 w-5 text-white mt-0.5 flex-shrink-0" />
                 <div>
-                  <p className="text-sm text-muted-foreground">123 Business District</p>
-                  <p className="text-sm text-muted-foreground">New York, NY 10001</p>
+                  <p className="text-sm text-white/70">123 Business District</p>
+                  <p className="text-sm text-white/70">New York, NY 10001</p>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
-                <Phone className="h-5 w-5 text-primary flex-shrink-0" />
-                <p className="text-sm text-muted-foreground">+1 (555) 123-4567</p>
+                <Phone className="h-5 w-5 text-white flex-shrink-0" />
+                <p className="text-sm text-white/70">+1 (555) 123-4567</p>
               </div>
               <div className="flex items-center space-x-3">
-                <Mail className="h-5 w-5 text-primary flex-shrink-0" />
-                <p className="text-sm text-muted-foreground">info@estatecore.com</p>
+                <Mail className="h-5 w-5 text-white flex-shrink-0" />
+                <p className="text-sm text-white/70">info@estatecore.com</p>
               </div>
             </div>
           </div>
 
           {/* Newsletter */}
           <div className="space-y-6">
-            <h3 className="text-lg font-semibold text-foreground">Newsletter</h3>
+            <h3 className="text-lg font-semibold text-white">Newsletter</h3>
             <div className="space-y-4">
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-white/70">
                 Subscribe to get updates about new properties and exclusive offers.
               </p>
               <div className="flex flex-col sm:flex-row gap-2">
@@ -99,14 +99,14 @@ export function Footer() {
         </div>
 
         <div className="border-t border-border mt-12 pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-white/70">
             © 2024 EstateCore. All rights reserved.
           </p>
           <div className="flex space-x-6">
-            <Link to="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+            <Link to="#" className="text-sm text-white/70 hover:text-white transition-colors">
               Privacy Policy
             </Link>
-            <Link to="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+            <Link to="#" className="text-sm text-white/70 hover:text-white transition-colors">
               Terms of Service
             </Link>
           </div>

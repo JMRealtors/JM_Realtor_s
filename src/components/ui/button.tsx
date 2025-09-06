@@ -9,17 +9,16 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary-hover shadow-elegant",
+        default: "bg-estate-platinum text-estate-platinum-foreground hover:bg-estate-platinum/90 shadow-card",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
-          "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+          "border-2 border-estate-platinum bg-transparent text-estate-platinum hover:bg-estate-platinum hover:text-estate-platinum-foreground",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+          "bg-estate-gold text-estate-gold-foreground hover:bg-estate-gold/90",
         ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
-        premium: "bg-estate-gold text-estate-gold-foreground hover:bg-estate-gold/90 shadow-elegant",
-        luxury: "bg-estate-luxury text-estate-luxury-foreground hover:bg-estate-luxury/90",
+        link: "text-estate-luxury underline-offset-4 hover:underline hover:text-estate-luxury/80",
+        premium: "bg-estate-luxury text-estate-luxury-foreground hover:bg-estate-luxury/90 shadow-elegant",
       },
       size: {
         default: "h-10 px-4 py-2",

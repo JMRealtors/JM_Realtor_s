@@ -81,11 +81,8 @@ export default {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			backgroundImage: {
-				'gradient-hero': 'var(--gradient-hero)',
-				'gradient-card': 'var(--gradient-card)',
+				'gradient-footer': 'var(--gradient-footer)',
 				'gradient-overlay': 'var(--gradient-overlay)',
-				'gradient-premium': 'var(--gradient-premium)',
-				'gradient-glass': 'var(--gradient-glass)',
 			},
 			boxShadow: {
 				'elegant': 'var(--shadow-elegant)',
