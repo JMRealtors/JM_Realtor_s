@@ -9,17 +9,17 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-gradient-hero text-primary-foreground shadow-elegant hover:shadow-glow hover:scale-105 transform",
+        default: "bg-primary text-primary-foreground hover:bg-primary-hover shadow-elegant",
         destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-elegant",
+          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
-          "border-2 border-primary/20 bg-gradient-glass backdrop-blur-sm hover:border-primary hover:bg-primary/10 hover:shadow-elegant",
+          "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
         secondary:
-          "bg-gradient-card text-secondary-foreground hover:shadow-card-hover border border-border/50",
-        ghost: "hover:bg-accent hover:text-accent-foreground hover:shadow-card",
-        link: "text-primary underline-offset-4 hover:underline hover:text-primary-glow",
-        premium: "bg-gradient-premium text-estate-luxury-foreground shadow-premium hover:shadow-glow hover:scale-105",
-        luxury: "bg-estate-luxury text-estate-luxury-foreground shadow-elegant hover:bg-estate-luxury/90 hover:shadow-glow",
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        ghost: "hover:bg-accent hover:text-accent-foreground",
+        link: "text-primary underline-offset-4 hover:underline",
+        premium: "bg-estate-gold text-estate-gold-foreground hover:bg-estate-gold/90 shadow-elegant",
+        luxury: "bg-estate-luxury text-estate-luxury-foreground hover:bg-estate-luxury/90",
       },
       size: {
         default: "h-10 px-4 py-2",

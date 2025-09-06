@@ -69,13 +69,13 @@ export function Statistics() {
   };
 
   return (
-    <section ref={sectionRef} className="py-20 bg-gradient-hero">
+    <section ref={sectionRef} className="py-24 bg-background border-t border-b border-border">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`text-center mb-16 ${isVisible ? "animate-fade-in" : "opacity-0"}`}>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-primary-foreground">
+          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-foreground">
             Our Achievements
           </h2>
-          <p className="text-lg text-primary-foreground/80 max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Numbers that speak to our commitment to excellence and client satisfaction in the real estate industry.
           </p>
         </div>
@@ -86,25 +86,25 @@ export function Statistics() {
             return (
               <div 
                 key={index}
-                className={`text-center p-8 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 transform transition-all duration-700 hover:scale-105 hover:bg-white/15 ${
+                className={`text-center p-8 rounded-xl bg-card border border-border shadow-card hover:shadow-card-hover transform transition-all duration-700 hover:scale-105 ${
                   isVisible 
                     ? "animate-slide-up opacity-100" 
                     : "opacity-0 translate-y-10"
                 }`}
                 style={{ animationDelay: `${index * 200}ms` }}
               >
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-full mb-6 animate-float">
-                  <IconComponent className="h-8 w-8 text-primary-foreground" />
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-full mb-6 animate-float">
+                  <IconComponent className="h-8 w-8 text-primary" />
                 </div>
-                <div className="text-4xl md:text-5xl font-bold mb-2 text-primary-foreground">
+                <div className="text-4xl md:text-5xl font-bold mb-2 text-foreground">
                   {index === 2 ? `$${(counters[index] / 1000).toFixed(1)}B` : 
                    index === 1 ? `${counters[index].toLocaleString()}` : 
                    `${counters[index]}${index === 0 ? '+' : index === 3 ? '+' : '+'}`}
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-primary-foreground">
+                <h3 className="text-xl font-semibold mb-2 text-foreground">
                   {stat.label}
                 </h3>
-                <p className="text-primary-foreground/70 text-sm">
+                <p className="text-muted-foreground text-sm">
                   {stat.description}
                 </p>
               </div>

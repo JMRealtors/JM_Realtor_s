@@ -69,14 +69,14 @@ export function Hero() {
         <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto animate-fade-in opacity-90">
           {banners[currentBanner].subtitle}
         </p>
-        <div className="flex flex-col sm:flex-row gap-6 justify-center animate-scale">
-          <Button size="lg" variant="premium" className="shadow-premium hover:shadow-glow transform hover:scale-105" asChild>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center animate-scale">
+          <Button size="lg" variant="default" asChild>
             <Link to="/projects">
               Explore Properties
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>
-          <Button size="lg" variant="outline" className="border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white hover:text-primary hover:border-white shadow-elegant" asChild>
+          <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary" asChild>
             <Link to="/contact">Contact Us</Link>
           </Button>
         </div>

@@ -173,7 +173,7 @@ export function FeaturedProperties() {
         </div>
 
         <div className={`text-center ${isVisible ? "animate-scale" : "opacity-0"}`}>
-          <Button size="lg" variant="luxury" className="shadow-elegant hover:shadow-glow" asChild>
+          <Button size="lg" asChild>
             <Link to="/projects">
               View All Properties
               <ArrowRight className="ml-2 h-5 w-5" />
