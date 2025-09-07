@@ -57,7 +57,6 @@ export function Hero() {
             alt={banner.title}
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-overlay" />
         </div>
       ))}
 
