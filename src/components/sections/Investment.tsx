@@ -1,12 +1,13 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from "@/components/ui/dialog";
 import { TrendingUp, Users, DollarSign, Percent, Building, PieChart, Target, ArrowRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { Link } from "react-router-dom";
 
 const investmentOpportunities = [
   {
@@ -22,11 +23,11 @@ const investmentOpportunities = [
     riskLevel: "Medium",
     description: "Premium residential development with high-end amenities and guaranteed returns.",
     raised: 65,
-    target: "$5,250,000"
+    target: "$5,250,000",
   },
   {
     id: 2,
-    title: "Commercial Office Tower", 
+    title: "Commercial Office Tower",
     location: "Manhattan, NY",
     totalValue: "$28,000,000",
     minInvestment: "$250,000",
@@ -37,12 +38,12 @@ const investmentOpportunities = [
     riskLevel: "Low",
     description: "Class A commercial building in prime Manhattan location with long-term tenants.",
     raised: 80,
-    target: "$11,200,000"
+    target: "$11,000,000",
   },
   {
     id: 3,
     title: "Mixed-Use Development",
-    location: "Austin, TX", 
+    location: "Austin, TX",
     totalValue: "$8,500,000",
     minInvestment: "$50,000",
     expectedReturn: "20-25%",
@@ -52,8 +53,8 @@ const investmentOpportunities = [
     riskLevel: "High",
     description: "Innovative mixed-use project combining retail, office, and residential spaces.",
     raised: 40,
-    target: "$3,825,000"
-  }
+    target: "$3,825,000",
+  },
 ];
 
 const investorTypes = [
@@ -63,62 +64,54 @@ const investorTypes = [
     minInvestment: "$500,000+",
     equityRange: "20-40%",
     benefits: ["Board seats", "Strategic guidance", "Network access", "Due diligence support"],
-    color: "bg-primary"
+    color: "bg-primary",
   },
   {
-    type: "Angel Investors", 
+    type: "Angel Investors",
     icon: Users,
     minInvestment: "$25,000+",
     equityRange: "5-15%",
     benefits: ["Mentorship", "Industry connections", "Flexible terms", "Quick decisions"],
-    color: "bg-estate-gold"
-  }
+    color: "bg-accent",
+  },
 ];
 
 export function Investment() {
   const [isVisible, setIsVisible] = useState(false);
-  const [selectedProject, setSelectedProject] = useState<typeof investmentOpportunities[0] | null>(null);
+  const [selectedProject, setSelectedProject] = useState(null);
   const [investmentAmount, setInvestmentAmount] = useState("");
   const [equityShare, setEquityShare] = useState("");
-  const sectionRef = useRef<HTMLElement>(null);
+  const sectionRef = useRef(null);
   const { toast } = useToast();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
+        if (entry.isIntersecting) setIsVisible(true);
       },
       { threshold: 0.1 }
     );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
+    if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
 
-  const calculateEquity = (amount: string, project: typeof investmentOpportunities[0]) => {
-    const investment = parseFloat(amount.replace(/,/g, ""));
-    const totalValue = parseFloat(project.totalValue.replace(/[$,]/g, ""));
-    const availableEquity = parseFloat(project.equityAvailable.replace("%", ""));
-    const maxEquityFromInvestment = (investment / totalValue) * 100;
-    return Math.min(maxEquityFromInvestment, availableEquity).toFixed(2);
+  const calculateEquity = (amount, project) => {
+    const num = parseFloat(amount.replace(/,/g, ""));
+    const total = parseFloat(project.totalValue.replace(/[^\d.-]/g, ""));
+    const available = parseFloat(project.equityAvailable.replace("%", ""));
+    const equity = (num / total) * 100;
+    return isNaN(equity) ? "" : Math.min(equity, available).toFixed(2);
   };
 
-  const handleInvestmentSubmit = () => {
+  const handleSubmit = () => {
     if (!selectedProject || !investmentAmount) return;
-    
     toast({
-      title: "Investment Interest Submitted",
-      description: `We'll contact you about your $${investmentAmount} investment in ${selectedProject.title}.`,
+      title: "Investment Submitted",
+      description: `You expressed interest investing $${investmentAmount} in ${selectedProject.title}.`,
     });
-    
+    setSelectedProject(null);
     setInvestmentAmount("");
     setEquityShare("");
-    setSelectedProject(null);
   };
 
   return (
@@ -126,193 +119,108 @@ export function Investment() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className={`text-center mb-16 ${isVisible ? "animate-fade-in" : "opacity-0"}`}>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-foreground">
-            Investment Opportunities
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Partner with venture capitalists and angel investors in premium real estate ventures. 
-            Secure equity stakes in high-growth properties with guaranteed returns.
+          <h2 className="text-4xl font-bold text-primary mb-3">Investment Opportunities</h2>
+          <p className="max-w-3xl mx-auto text-muted-foreground text-lg">
+            Partner with venture capitalists and angel investors in premium real estate ventures.
           </p>
         </div>
 
         {/* Investor Types */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-          {investorTypes.map((investor, index) => {
+          {investorTypes.map((investor, idx) => {
             const Icon = investor.icon;
             return (
-              <Card 
-                key={investor.type}
-                className={`shadow-card hover:shadow-card-hover transition-all duration-500 ${
-                  isVisible 
-                    ? "animate-slide-up opacity-100" 
-                    : "opacity-0 translate-y-10"
-                }`}
-                style={{ animationDelay: `${index * 200}ms` }}
-              >
-                <CardHeader>
-                  <div className="flex items-center gap-4">
-                    <div className={`${investor.color} text-white p-3 rounded-lg`}>
-                      <Icon className="h-6 w-6" />
-                    </div>
-                    <div>
-                      <CardTitle className="text-xl">{investor.type}</CardTitle>
-                      <p className="text-muted-foreground">Min: {investor.minInvestment}</p>
-                    </div>
+              <Card key={idx} className={`shadow p-6 rounded-lg`}>
+                <div className="flex items-center mb-4 space-x-4">
+                  <div className={`${investor.color} p-3 rounded-lg text-white`}>
+                    <Icon size={24} />
                   </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="mb-4">
-                    <Badge variant="outline" className="mb-2">
-                      Equity Range: {investor.equityRange}
-                    </Badge>
+                  <div>
+                    <h3 className="text-xl font-semibold">{investor.type}</h3>
+                    <p className="text-muted-foreground">Min Investment: {investor.minInvestment}</p>
                   </div>
-                  <ul className="space-y-2">
-                    {investor.benefits.map((benefit, idx) => (
-                      <li key={idx} className="flex items-center text-sm">
-                        <Target className="h-4 w-4 text-primary mr-2" />
-                        {benefit}
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
+                </div>
+                <Badge variant="outline" className="mb-4">{`Equity Range: ${investor.equityRange}`}</Badge>
+                <ul className="list-disc ml-6 space-y-1 text-sm text-muted-foreground">
+                  {investor.benefits.map((b, i) => (
+                    <li key={i}>{b}</li>
+                  ))}
+                </ul>
               </Card>
             );
           })}
         </div>
 
         {/* Investment Opportunities */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-          {investmentOpportunities.map((opportunity, index) => (
-            <Card 
-              key={opportunity.id}
-              className={`shadow-card hover:shadow-card-hover transition-all duration-500 ${
-                isVisible 
-                  ? "animate-scale opacity-100" 
-                  : "opacity-0"
-              }`}
-              style={{ animationDelay: `${index * 250}ms` }}
-            >
-              <CardHeader>
-                <div className="flex justify-between items-start mb-2">
-                  <CardTitle className="text-lg">{opportunity.title}</CardTitle>
-                  <Badge 
-                    variant={opportunity.riskLevel === "Low" ? "default" : 
-                            opportunity.riskLevel === "Medium" ? "secondary" : "destructive"}
-                  >
-                    {opportunity.riskLevel} Risk
-                  </Badge>
-                </div>
-                <p className="text-sm text-muted-foreground">{opportunity.location}</p>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {investmentOpportunities.map((project, idx) => (
+            <Card key={project.id} className={`shadow p-6 rounded-lg max-w-md mx-auto`}>
+              <CardHeader className="flex justify-between items-center">
+                <h3 className="text-xl font-bold">
+                  {project.title} <span className="ml-3 text-lg font-semibold text-primary">{project.totalValue}</span>
+                </h3>
+                <Badge variant={project.riskLevel === "Low" ? "default" : project.riskLevel === "Medium" ? "secondary" : "destructive"}>
+                  {project.riskLevel} Risk
+                </Badge>
               </CardHeader>
+              <p className="text-muted-foreground mb-4">{project.location}</p>
+              <div className="grid grid-cols-2 gap-4 mb-4 text-sm text-muted-foreground">
+                <div>Min Investment: <b>{project.minInvestment}</b></div>
+                <div>Expected ROI: <b>{project.expectedReturn}</b></div>
+                <div>Equity Available: <b>{project.equityAvailable}</b></div>
+                <div>Timeline: <b>{project.timeline}</b></div>
+              </div>
+              <div className="mb-4">
+                <div className="mb-1 text-sm font-semibold text-muted-foreground">Funding Progress</div>
+                <div className="w-full bg-muted rounded-full h-2 mb-2">
+                  <div className="bg-primary rounded-full h-2 transition-all" style={{width: `${project.raised}%`}}></div>
+                </div>
+                <div className="text-xs text-muted-foreground">Target: {project.target}</div>
+              </div>
+              <p className="mb-6">{project.description}</p>
               
-              <CardContent className="space-y-4">
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div>
-                    <p className="text-muted-foreground">Total Value</p>
-                    <p className="font-semibold">{opportunity.totalValue}</p>
-                  </div>
-                  <div>
-                    <p className="text-muted-foreground">Min Investment</p>
-                    <p className="font-semibold text-primary">{opportunity.minInvestment}</p>
-                  </div>
-                  <div>
-                    <p className="text-muted-foreground">Expected Return</p>
-                    <p className="font-semibold text-estate-success">{opportunity.expectedReturn}</p>
-                  </div>
-                  <div>
-                    <p className="text-muted-foreground">Equity Available</p>
-                    <p className="font-semibold">{opportunity.equityAvailable}</p>
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span>Funding Progress</span>
-                    <span>{opportunity.raised}%</span>
-                  </div>
-                  <div className="w-full bg-secondary rounded-full h-2">
-                    <div 
-                      className="bg-primary h-2 rounded-full transition-all duration-1000"
-                      style={{ width: `${opportunity.raised}%` }}
-                    />
-                  </div>
-                  <p className="text-xs text-muted-foreground">
-                    Target: {opportunity.target} • Timeline: {opportunity.timeline}
-                  </p>
-                </div>
-
-                <p className="text-sm text-muted-foreground">
-                  {opportunity.description}
-                </p>
-
-                <div className="flex gap-2">
-                  <Badge variant="outline" className="text-xs">
-                    {opportunity.investorType}
-                  </Badge>
-                </div>
-
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <Button 
-                      className="w-full"
-                      onClick={() => setSelectedProject(opportunity)}
-                    >
-                      <DollarSign className="mr-2 h-4 w-4" />
-                      Invest Now
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent className="sm:max-w-md">
-                    <DialogHeader>
-                      <DialogTitle>Investment Calculator</DialogTitle>
-                    </DialogHeader>
-                    <div className="space-y-4">
-                      <div>
-                        <Label htmlFor="investment">Investment Amount ($)</Label>
-                        <Input
-                          id="investment"
-                          placeholder="Enter amount"
-                          value={investmentAmount}
-                          onChange={(e) => {
-                            setInvestmentAmount(e.target.value);
-                            if (selectedProject) {
-                              setEquityShare(calculateEquity(e.target.value, selectedProject));
-                            }
-                          }}
-                        />
-                      </div>
-                      
-                      {investmentAmount && selectedProject && (
-                        <div className="p-4 bg-muted rounded-lg">
-                          <div className="flex justify-between items-center mb-2">
-                            <span className="text-sm font-medium">Estimated Equity:</span>
-                            <span className="text-lg font-bold text-primary">{equityShare}%</span>
-                          </div>
-                          <div className="flex justify-between items-center text-sm text-muted-foreground">
-                            <span>Project:</span>
-                            <span>{selectedProject.title}</span>
-                          </div>
-                        </div>
-                      )}
-                      
-                      <Button onClick={handleInvestmentSubmit} className="w-full">
-                        Submit Investment Interest
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
-                    </div>
-                  </DialogContent>
-                </Dialog>
-              </CardContent>
+              <div className="flex space-x-3">
+                <Button
+                  variant="outline"
+                  className="flex-1"
+                  onClick={() => setSelectedProject(project)}
+                >
+                  Invest Now
+                </Button>
+                <Button asChild variant="outline" className="flex-1">
+                  <Link to={`/contact?project=${project.id}`}>Contact</Link>
+                </Button>
+              </div>
             </Card>
           ))}
         </div>
 
-        {/* CTA */}
-        <div className={`text-center ${isVisible ? "animate-fade-in" : "opacity-0"}`}>
-          <Button size="lg" variant="premium" asChild>
-            <a href="mailto:investments@estatecore.com">
-              <PieChart className="mr-2 h-5 w-5" />
-              Schedule Investment Consultation
-            </a>
+        {selectedProject && (
+          <Dialog open={!!selectedProject} onOpenChange={(open) => !open && setSelectedProject(null)}>
+            <DialogContent className="max-w-lg">
+              <DialogHeader>
+                <DialogTitle>{selectedProject.title} - Investment Calculator</DialogTitle>
+                <DialogDescription>Enter your investment amount to see estimated equity.</DialogDescription>
+              </DialogHeader>
+              <Input type="number" placeholder="Investment Amount ($)" value={investmentAmount} onChange={(e) => setInvestmentAmount(e.target.value)} />
+              <div className="mt-4 flex justify-between text-sm">
+                <span>Estimated Equity:</span>
+                <span className="font-semibold">
+                  {investmentAmount && selectedProject ? calculateEquity(investmentAmount, selectedProject) + "%" : "0%"}
+                </span>
+              </div>
+              <Button className="mt-6 w-full" onClick={handleSubmit}>
+                Submit Investment
+              </Button>
+            </DialogContent>
+          </Dialog>
+        )}
+
+        <div className="text-center mt-12">
+          <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white" size="lg">
+            <Link to="/investments">
+              Schedule Consultation <PieChart className="ml-2 w-5 h-5" />
+            </Link>
           </Button>
         </div>
       </div>

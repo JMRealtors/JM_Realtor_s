@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -5,52 +6,52 @@ import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from "luc
 
 export function Footer() {
   return (
-    <footer className="bg-primary border-t border-border">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+    <footer className="bg-blue-100 text-blue-900 rounded-lg p-16">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-6">
             <div>
               <div className="flex items-center mb-4">
-                <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center mr-3">
-                  <span className="text-white font-bold text-lg">E</span>
+                <div className="w-10 h-10 bg-blue-200 rounded-lg flex items-center justify-center mr-3">
+                  <span className="text-blue-700 font-bold text-lg">E</span>
                 </div>
-                <span className="text-xl font-bold text-white">EstateCore</span>
+                <span className="text-2xl font-bold text-blue-900">EstateCore</span>
               </div>
-              <p className="text-white/70 text-sm leading-relaxed">
-                Creating premium real estate experiences with innovative solutions and exceptional service for over a decade.
+              <p className="text-blue-700 text-sm">
+                Creating premium real estate experiences with innovative solutions for over a decade.
               </p>
             </div>
             <div className="flex space-x-4">
-              <Button variant="ghost" size="sm" className="p-2 h-9 w-9 text-white hover:bg-white/10">
-                <Facebook className="h-4 w-4" />
+              <Button variant="ghost" size="sm" className="p-2 h-9 w-9 text-blue-700 hover:bg-blue-200">
+                <Facebook className="w-4 h-4" />
               </Button>
-              <Button variant="ghost" size="sm" className="p-2 h-9 w-9 text-white hover:bg-white/10">
-                <Twitter className="h-4 w-4" />
+              <Button variant="ghost" size="sm" className="p-2 h-9 w-9 text-blue-700 hover:bg-blue-200">
+                <Twitter className="w-4 h-4" />
               </Button>
-              <Button variant="ghost" size="sm" className="p-2 h-9 w-9 text-white hover:bg-white/10">
-                <Instagram className="h-4 w-4" />
+              <Button variant="ghost" size="sm" className="p-2 h-9 w-9 text-blue-700 hover:bg-blue-200">
+                <Instagram className="w-4 h-4" />
               </Button>
-              <Button variant="ghost" size="sm" className="p-2 h-9 w-9 text-white hover:bg-white/10">
-                <Linkedin className="h-4 w-4" />
+              <Button variant="ghost" size="sm" className="p-2 h-9 w-9 text-blue-700 hover:bg-blue-200">
+                <Linkedin className="w-4 h-4" />
               </Button>
             </div>
           </div>
 
           {/* Quick Links */}
           <div className="space-y-6">
-            <h3 className="text-lg font-semibold text-white">Quick Links</h3>
+            <h3 className="text-lg font-semibold text-blue-900">Quick Links</h3>
             <nav className="flex flex-col space-y-3">
-              <Link to="/about" className="text-white/80 hover:text-white transition-colors text-sm">
+              <Link to="/about" className="text-blue-700 hover:text-blue-900 transition-colors">
                 About Us
               </Link>
-              <Link to="/projects" className="text-white/80 hover:text-white transition-colors text-sm">
+              <Link to="/projects" className="text-blue-700 hover:text-blue-900 transition-colors">
                 Our Projects
               </Link>
-              <Link to="/careers" className="text-white/80 hover:text-white transition-colors text-sm">
+              <Link to="/careers" className="text-blue-700 hover:text-blue-900 transition-colors">
                 Careers
               </Link>
-              <Link to="/contact" className="text-white/80 hover:text-white transition-colors text-sm">
+              <Link to="/contact" className="text-blue-700 hover:text-blue-900 transition-colors">
                 Contact Us
               </Link>
             </nav>
@@ -58,39 +59,39 @@ export function Footer() {
 
           {/* Contact Info */}
           <div className="space-y-6">
-            <h3 className="text-lg font-semibold text-white">Contact Info</h3>
+            <h3 className="text-lg font-semibold text-blue-900">Contact Info</h3>
             <div className="space-y-4">
               <div className="flex items-start space-x-3">
-                <MapPin className="h-5 w-5 text-white mt-0.5 flex-shrink-0" />
+                <MapPin className="w-5 h-5 text-blue-700 mt-1" />
                 <div>
-                  <p className="text-sm text-white/70">123 Business District</p>
-                  <p className="text-sm text-white/70">New York, NY 10001</p>
+                  <p className="text-blue-700 text-sm">123 Business District</p>
+                  <p className="text-blue-700 text-sm">New York, NY 10001</p>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
-                <Phone className="h-5 w-5 text-white flex-shrink-0" />
-                <p className="text-sm text-white/70">+1 (555) 123-4567</p>
+                <Phone className="w-5 h-5 text-blue-700" />
+                <p className="text-blue-700">+1 (555) 123-4567</p>
               </div>
               <div className="flex items-center space-x-3">
-                <Mail className="h-5 w-5 text-white flex-shrink-0" />
-                <p className="text-sm text-white/70">info@estatecore.com</p>
+                <Mail className="w-5 h-5 text-blue-700" />
+                <p className="text-blue-700">info@estatecore.com</p>
               </div>
             </div>
           </div>
 
           {/* Newsletter */}
           <div className="space-y-6">
-            <h3 className="text-lg font-semibold text-white">Newsletter</h3>
+            <h3 className="text-lg font-semibold text-blue-900">Newsletter</h3>
             <div className="space-y-4">
-              <p className="text-sm text-white/70">
+              <p className="text-blue-700 text-sm">
                 Subscribe to get updates about new properties and exclusive offers.
               </p>
-              <div className="flex flex-col sm:flex-row gap-2">
+              <div className="flex space-x-2">
                 <Input 
                   placeholder="Enter your email" 
-                  className="flex-1"
+                  className="flex-1 bg-blue-200 text-blue-900 border border-blue-300 placeholder-blue-700"
                 />
-                <Button size="sm" className="whitespace-nowrap">
+                <Button variant="default" size="sm" className="bg-blue-500 hover:bg-blue-600 text-white">
                   Subscribe
                 </Button>
               </div>
@@ -98,17 +99,11 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-border mt-12 pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          <p className="text-sm text-white/70">
-            © 2024 EstateCore. All rights reserved.
-          </p>
+        <div className="border-t border-blue-300 mt-10 pt-6 flex flex-col md:flex-row items-center justify-between text-blue-700 text-sm gap-4 md:gap-0">
+          <div>© 2024 EstateCore. All rights reserved.</div>
           <div className="flex space-x-6">
-            <Link to="#" className="text-sm text-white/70 hover:text-white transition-colors">
-              Privacy Policy
-            </Link>
-            <Link to="#" className="text-sm text-white/70 hover:text-white transition-colors">
-              Terms of Service
-            </Link>
+            <Link to="#" className="hover:text-blue-900 transition-colors">Privacy Policy</Link>
+            <Link to="#" className="hover:text-blue-900 transition-colors">Terms of Service</Link>
           </div>
         </div>
       </div>
