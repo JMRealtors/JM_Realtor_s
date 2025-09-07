@@ -61,11 +61,11 @@ export function Hero() {
       ))}
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center text-white animate-fade-in">
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 animate-slide-up">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center animate-fade-in">
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 animate-slide-up text-white drop-shadow-lg">
           {banners[currentBanner].title}
         </h1>
-        <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto animate-fade-in opacity-90">
+        <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto animate-fade-in text-white drop-shadow-md">
           {banners[currentBanner].subtitle}
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center animate-scale">
