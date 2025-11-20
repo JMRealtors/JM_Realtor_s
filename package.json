@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "preview": "vite preview"
   },
-  "homepage": "https:///JMREALTORS.github.io/JM_Realtor_s/",
+  "homepage": "https://JMREALTORS.github.io/JM_Realtor_s/",
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
     "@radix-ui/react-accordion": "^1.2.11",
