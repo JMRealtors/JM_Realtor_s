@@ -24,7 +24,7 @@ export function Header() {
             <Link to="/" className="flex items-center">
               <div className="w-10 h-10 bg-gradient-hero rounded-lg flex items-center justify-center mr-3">
                 <img
-      src="/logo.jpg"
+      src="/logo.png"
       alt="JM Realtors Logo"
       className="w-full h-full object-contain"
     />
