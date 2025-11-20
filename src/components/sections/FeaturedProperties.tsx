@@ -18,23 +18,22 @@ import propertyBw2 from "@/assets/property-bw-2.jpg";
 import propertyBw3 from "@/assets/property-bw-3.jpg";
 import propertyBw4 from "@/assets/property-bw-4.jpg";
 import propertyBw5 from "@/assets/property-bw-5.jpg";
-
+import plot from "/plots.jpg";
 const properties = [
   {
     id: 1,
-    title: "Premium Plot",
-    location: "Coimbatore District",
+    title: "DTCP Approved Residential Plot - Okkilipalayam",
+    location: "Okkilipalayam, Coimbatore",
     price: "₹15.5 Lakhs",
     image: propertyBw1,
     size: "5.2 Cents",
-    pricePerAcre: "₹3.0L/Cent",
-    roi: "+22%",
+    pricePerUnit: "₹3.0L / Cent",
     features: ["DTCP Approved", "Corner Plot", "Gated Community"],
     status: "Available",
     statusColor: "bg-blue-100 text-blue-700",
-    type: "Plot",
+    type: "Residential Plot",
     description:
-      "Premium plot in well-planned layout with all modern amenities and excellent connectivity.",
+      "Premium DTCP approved residential plot in a well-planned layout with tar road, drainage and street lights. Ideal for investment or immediate construction.",
     seller: {
       name: "Raman Kumar",
       phone: "+91 98765 43210",
@@ -44,98 +43,85 @@ const properties = [
   },
   {
     id: 2,
-    title: "Modern Penthouse",
-    location: "Manhattan, NY",
-    price: "$3,200,000",
-    pricePerArea: "$1,142/sqft",
+    title: "Residential Plot Near Colleges - Othakal Mandapam",
+    location: "Othakal Mandapam, Coimbatore",
+    price: "₹12.8 Lakhs",
     image: propertyBw2,
-    size: "2,800 sqft",
-    beds: 3,
-    baths: 3,
-    type: "Penthouse",
-    roi: "+18%",
+    size: "4.0 Cents",
+    pricePerUnit: "₹3.2L / Cent",
+    type: "Residential Plot",
+    features: ["Near Engineering Colleges", "Good Ground Water", "Tar Road"],
     status: "Sold",
     statusColor: "bg-red-100 text-red-700",
-    features: [
-      "Terrace",
-      "Floor-to-ceiling windows",
-      "Smart Home",
-      "Designer Finishes",
-    ],
-    description: `Located in the heart of Manhattan, this modern penthouse offers urban sophistication and stunning skyline views.`,
+    description:
+      "Well-located residential plot close to leading colleges and bus stop. Calm residential locality with good rental potential.",
     seller: {
       name: "Urban Realty",
-      phone: "+1 555 987 6543",
-      email: "info@penthouseurban.com",
+      phone: "+91 955 987 6543",
+      email: "info@urbanrealty.com",
       verified: true,
     },
   },
   {
     id: 3,
-    title: "Downtown Loft",
-    location: "Los Angeles, CA",
-    price: "$1,750,000",
-    pricePerArea: "$921/sqft",
+    title: "Budget Residential Plot - Kinathukadavu",
+    location: "Kinathukadavu, Coimbatore",
+    price: "₹8.9 Lakhs",
     image: propertyBw3,
-    size: "1,900 sqft",
-    beds: 2,
-    baths: 2,
-    type: "Loft",
-    roi: "+15%",
+    size: "3.5 Cents",
+    pricePerUnit: "₹2.5L / Cent",
+    type: "Residential Plot",
+    features: ["Bus Route Layout", "Street Lights", "Calm Locality"],
     status: "Available",
     statusColor: "bg-green-100 text-green-700",
-    features: ["Exposed Brick", "Rooftop Access", "Gourmet Kitchen"],
-    description: `This chic downtown loft combines industrial style with modern comforts.`,
+    description:
+      "Budget-friendly residential plot suitable for first-time buyers and long-term investors, with easy access to Kinathukadavu town.",
     seller: {
-      name: "LA Living",
-      phone: "+1 555 246 8013",
-      email: "loft@downtownla.com",
+      name: "Loft Living",
+      phone: "+91 555 246 8013",
+      email: "plots@loftliving.com",
       verified: false,
     },
   },
   {
     id: 4,
-    title: "Corporate Office",
-    location: "San Francisco, CA",
-    price: "$4,500,000",
-    pricePerArea: "$375/sqft",
+    title: "Commercial Plot - Pollachi Main Road",
+    location: "Pollachi Road, Coimbatore",
+    price: "₹45 Lakhs",
     image: propertyBw4,
-    size: "12,000 sqft",
-    beds: 0,
-    baths: 8,
-    type: "Office Space",
-    roi: "+9%",
+    size: "8.0 Cents",
+    pricePerUnit: "₹5.6L / Cent",
+    type: "Commercial Plot",
+    features: ["Main Road Frontage", "High Visibility", "Ideal for Showroom"],
     status: "Under Contract",
     statusColor: "bg-yellow-100 text-yellow-700",
-    features: ["Meeting Rooms", "High Security", "Downtown Address"],
-    description: `Prime corporate office space located in San Francisco’s financial district.`,
+    description:
+      "Commercial plot with excellent road frontage on Pollachi main road. Suitable for showroom, office, or commercial complex.",
     seller: {
       name: "SF Corporate Realty",
-      phone: "+1 555 789 3456",
+      phone: "+91 555 789 3456",
       email: "office@sfcorporate.com",
       verified: false,
     },
   },
   {
     id: 5,
-    title: "Family Townhouse",
-    location: "Chicago, IL",
-    price: "$890,000",
-    pricePerArea: "$371/sqft",
+    title: "Residential Plot Near Schools - Aathupalam",
+    location: "Aathupalam, Coimbatore",
+    price: "₹10.5 Lakhs",
     image: propertyBw5,
-    size: "2,400 sqft",
-    beds: 4,
-    baths: 3,
-    type: "Townhouse",
-    roi: "+13%",
+    size: "4.2 Cents",
+    pricePerUnit: "₹2.5L / Cent",
+    type: "Residential Plot",
+    features: ["Near Schools", "Good Water Source", "Residential Layout"],
     status: "Available",
     statusColor: "bg-green-100 text-green-700",
-    features: ["Near Schools", "Garage", "Backyard Patio"],
-    description: `Perfect family townhouse located near great schools and parks.`,
+    description:
+      "Ideal residential plot for families, located near schools, markets, and with easy access to main roads.",
     seller: {
-      name: "Chicago Home Sales",
-      phone: "+1 555 334 7788",
-      email: "familyhome@chicago.com",
+      name: "Hari Home Sales",
+      phone: "+91 555 334 7788",
+      email: "sales@harihomes.com",
       verified: true,
     },
   },
@@ -167,11 +153,11 @@ export function FeaturedProperties() {
           }`}
         >
           <h2 className="text-3xl md:text-5xl font-bold mb-4 text-gray-900">
-            Featured Properties
+            Featured Land Parcels
           </h2>
           <p className="text-lg text-gray-600 max-w-xl mx-auto">
-            Explore premium investment opportunities handpicked for growth,
-            security, and value.
+            Handpicked plots in and around Coimbatore with clear titles and
+            promising growth potential.
           </p>
         </div>
 
@@ -195,7 +181,8 @@ export function FeaturedProperties() {
                   <img
                     src={property.image}
                     alt={property.title}
-                    className="w-full h-64 object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700"
+                    className="w-full h-64 object-cover transition-all duration-700"
+                    style={{ filter: "none" }}
                   />
                   <Badge
                     className={`absolute top-4 left-4 ${property.statusColor} border-0`}
@@ -213,12 +200,19 @@ export function FeaturedProperties() {
                   <h3 className="text-xl font-semibold mb-3 text-gray-900 group-hover:text-blue-700 transition">
                     {property.title}
                   </h3>
-                  <div className="flex items-center text-gray-500 mb-6">
+                  <div className="flex items-center text-gray-500 mb-2">
                     <MapPin className="h-4 w-4 mr-2" />
                     <span className="text-sm font-medium">
                       {property.location}
                     </span>
                   </div>
+                  <p className="text-sm text-gray-500 mb-4">
+                    Size: <span className="font-medium">{property.size}</span>{" "}
+                    &bull;{" "}
+                    <span className="font-medium">
+                      {property.pricePerUnit}
+                    </span>
+                  </p>
                   <Button
                     variant="outline"
                     className="w-full flex items-center justify-center gap-2 border-blue-200 text-blue-700 bg-white hover:bg-blue-50"
@@ -281,7 +275,7 @@ export function FeaturedProperties() {
                       </div>
                       <div>
                         <div className="uppercase text-xs text-gray-500">
-                          Size
+                          Plot Size
                         </div>
                         <div className="font-semibold text-gray-800">
                           {property.size}
@@ -289,15 +283,15 @@ export function FeaturedProperties() {
                       </div>
                       <div>
                         <div className="uppercase text-xs text-gray-500">
-                          ROI
+                          Price / Unit
                         </div>
-                        <div className="font-semibold text-blue-700">
-                          {property.roi}
+                        <div className="font-semibold text-gray-800">
+                          {property.pricePerUnit}
                         </div>
                       </div>
                       <div>
                         <div className="uppercase text-xs text-gray-500">
-                          Type
+                          Plot Type
                         </div>
                         <div className="font-semibold text-gray-800">
                           {property.type}
@@ -371,7 +365,7 @@ export function FeaturedProperties() {
           ))}
         </div>
 
-        {/* View All */}
+        {/* Load More → Projects */}
         <div
           className={`text-center ${isVisible ? "animate-scale" : "opacity-0"}`}
         >
@@ -380,8 +374,8 @@ export function FeaturedProperties() {
             className="bg-blue-50 text-blue-700 hover:bg-blue-100 transition duration-300"
             asChild
           >
-            <Link to="/properties">
-              View All Properties <ArrowRight className="h-5 w-5" />
+            <Link to="/projects">
+              Load More <ArrowRight className="h-5 w-5" />
             </Link>
           </Button>
         </div>

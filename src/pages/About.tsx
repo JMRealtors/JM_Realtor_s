@@ -12,18 +12,48 @@ export default function About() {
       <main className="flex-grow">
         {/* Hero Section */}
         <section className="relative py-20 bg-gradient-to-r from-blue-300 to-blue-200 text-gray-900">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 drop-shadow">
-              About EstateCore
-            </h1>
-            <p className="text-xl md:text-2xl font-light mb-8">
-              Building Dreams, Creating Communities, Delivering Excellence
-            </p>
-            <p className="text-lg max-w-3xl mx-auto leading-relaxed">
-              With over 6 years of experience in the real estate industry, we
-              have established ourselves as a trusted name in residential
-              development, committed to creating exceptional living experiences.
-            </p>
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid md:grid-cols-2 gap-10 items-center">
+              {/* Left: Text */}
+              <div className="text-center md:text-left">
+                <h1 className="text-4xl md:text-6xl font-bold mb-6 drop-shadow">
+                  About JM Realtors
+                </h1>
+                <p className="text-xl md:text-2xl font-light mb-8">
+                  Building Dreams, Creating Communities, Delivering Excellence
+                </p>
+                <p className="text-lg max-w-3xl mx-auto md:mx-0 leading-relaxed">
+                  At JM Realtors, we are a growing real estate team focused on delivering
+                  clear, transparent and value-driven property deals. Our goal is to help
+                  families and investors find the right plots in and around Coimbatore
+                  with complete trust and clarity.
+
+                </p>
+              </div>
+
+              {/* Right: Image */}
+              <div className="flex justify-center md:justify-end">
+                <div className="relative w-full max-w-md">
+                  <div className="rounded-3xl overflow-hidden shadow-2xl border border-white/60 bg-white">
+                    <img
+                      src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1000&q=80"
+                      alt="Modern residential community"
+                      className="w-full h-64 md:h-80 object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                  {/* Small floating card */}
+                  <div className="absolute -bottom-6 -left-4 bg-white/90 backdrop-blur-md rounded-2xl shadow-lg px-4 py-3 border border-blue-100">
+                    <p className="text-xs font-semibold text-blue-700">
+                      JM Realtors
+                    </p>
+                    <p className="text-xs text-gray-600">
+                      Delivering quality plots & communities in and around Coimbatore.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -34,7 +64,7 @@ export default function About() {
               Our Story
             </h2>
             <p className="text-lg leading-relaxed text-center text-gray-700 max-w-4xl mx-auto">
-              EstateCore was founded with a vision to redefine residential real
+              JM Realtors was founded with a vision to redefine residential real
               estate by blending innovative designs with sustainable living. Over
               the years, we’ve successfully delivered projects that have not only
               met but exceeded customer expectations. Our journey has been marked
@@ -73,7 +103,7 @@ export default function About() {
         <section className="py-16 bg-blue-50">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-bold mb-10 text-center text-blue-800">
-              Why Choose EstateCore?
+              Why Choose JM Realtors?
             </h2>
             <div className="grid md:grid-cols-3 gap-10">
               {[

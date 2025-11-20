@@ -14,8 +14,8 @@ const banners = [
   },
   {
     image: heroBanner2,
-    title: "Investment Opportunities Await",
-    subtitle: "Build your wealth portfolio with prime real estate investments",
+    title: "Premium Plots for Modern Lifestyles",
+    subtitle: "Secure your space in Coimbatore’s fast-growing residential corridors.",
   },
   {
     image: heroBanner3,

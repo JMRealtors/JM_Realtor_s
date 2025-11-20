@@ -16,7 +16,7 @@ const stats = [
   },
   {
     icon: TrendingUp,
-    value: "$2.8B+",
+    value: "Rs.2.8 Crore+",
     label: "Total Sales",
     description: "Combined value of all transactions completed",
   },
@@ -97,7 +97,7 @@ export function Statistics() {
                   <IconComponent className="h-8 w-8 text-primary" />
                 </div>
                 <div className="text-4xl md:text-5xl font-bold mb-2 text-foreground">
-                  {index === 2 ? `$${(counters[index] / 1000).toFixed(1)}B` : 
+                  {index === 2 ? `Rs.${(counters[index] / 1000).toFixed(1)}Cr` : 
                    index === 1 ? `${counters[index].toLocaleString()}` : 
                    `${counters[index]}${index === 0 ? '+' : index === 3 ? '+' : '+'}`}
                 </div>

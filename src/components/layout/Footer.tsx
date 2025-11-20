@@ -14,9 +14,13 @@ export function Footer() {
             <div>
               <div className="flex items-center mb-4">
                 <div className="w-10 h-10 bg-blue-200 rounded-lg flex items-center justify-center mr-3">
-                  <span className="text-blue-700 font-bold text-lg">E</span>
+                  <img
+      src="/logo.jpg"
+      alt="JM Realtors Logo"
+      className="w-full h-full object-contain"
+    />
                 </div>
-                <span className="text-2xl font-bold text-blue-900">EstateCore</span>
+                <span className="text-2xl font-bold text-blue-900">JM Realtors</span>
               </div>
               <p className="text-blue-700 text-sm">
                 Creating premium real estate experiences with innovative solutions for over a decade.
@@ -62,19 +66,19 @@ export function Footer() {
             <h3 className="text-lg font-semibold text-blue-900">Contact Info</h3>
             <div className="space-y-4">
               <div className="flex items-start space-x-3">
-                <MapPin className="w-5 h-5 text-blue-700 mt-1" />
+                
                 <div>
-                  <p className="text-blue-700 text-sm">123 Business District</p>
-                  <p className="text-blue-700 text-sm">New York, NY 10001</p>
+                  <p className="text-blue-700 text-sm">XX XX XX</p>
+                  <p className="text-blue-700 text-sm">Coimbatore</p>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-blue-700" />
-                <p className="text-blue-700">+1 (555) 123-4567</p>
+                <p className="text-blue-700">+91 789758 43454</p>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-blue-700" />
-                <p className="text-blue-700">info@estatecore.com</p>
+                <p className="text-blue-700">info@jmrealtors.com</p>
               </div>
             </div>
           </div>
@@ -100,7 +104,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-blue-300 mt-10 pt-6 flex flex-col md:flex-row items-center justify-between text-blue-700 text-sm gap-4 md:gap-0">
-          <div>© 2024 EstateCore. All rights reserved.</div>
+          <div>© 2024 JM Realtors. All rights reserved.</div>
           <div className="flex space-x-6">
             <Link to="#" className="hover:text-blue-900 transition-colors">Privacy Policy</Link>
             <Link to="#" className="hover:text-blue-900 transition-colors">Terms of Service</Link>

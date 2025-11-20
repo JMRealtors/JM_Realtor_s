@@ -8,7 +8,6 @@ const navigation = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
   { name: "Projects", href: "/projects" },
-  { name: "Investments", href: "/careers" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -24,9 +23,13 @@ export function Header() {
           <div className="flex-shrink-0">
             <Link to="/" className="flex items-center">
               <div className="w-10 h-10 bg-gradient-hero rounded-lg flex items-center justify-center mr-3">
-                <span className="text-primary-foreground font-bold text-lg">E</span>
+                <img
+      src="/logo.jpg"
+      alt="JM Realtors Logo"
+      className="w-full h-full object-contain"
+    />
               </div>
-              <span className="text-xl font-bold text-foreground">EstateCore</span>
+              <span className="text-xl font-bold text-foreground">JM Realtors</span>
             </Link>
           </div>
 
