@@ -15,7 +15,7 @@ export function Footer() {
               <div className="flex items-center mb-4">
                 <div className="w-10 h-10 bg-blue-200 rounded-lg flex items-center justify-center mr-3">
                   <img
-      src="/logo.jpg"
+      src="/JM_Realtor_s/logo.png"
       alt="JM Realtors Logo"
       className="w-full h-full object-contain"
     />
